@@ -137,13 +137,10 @@ function VREnabledHumanoidClient:_handleHoldingActivation(brio)
 	local maid = brio:ToMaid()
 	local adornee = brio:GetValue()
 
-	print("adornee", adornee)
-
 	if adornee then
 		for _, binder in pairs(self._vrBinderGroupsClient.VRHoldable:GetBinders()) do
 			local value = binder:Get(adornee)
 			if value then
-				print("Calling")
 				value:OnVRHandHold(maid)
 			end
 		end
