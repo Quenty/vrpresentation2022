@@ -47,6 +47,21 @@ function VREnabledHumanoidClient:RequestDrop(sideName)
 	end)
 end
 
+function VREnabledHumanoidClient:GetHumanoid()
+	return self._obj
+end
+
+function VREnabledHumanoidClient:FindHoldable(sideName)
+	local gripAttachment = self:_getGripAttachment(sideName)
+	if not gripAttachment then
+		warn("No gripAttachment for ", sideName)
+		return nil
+	end
+
+	local holdable = VREnabledHumanoidUtils.findHoldable(gripAttachment.WorldPosition)
+	return holdable
+end
+
 function VREnabledHumanoidClient:SetGripCFrame(sideName, worldCFrame)
 	assert(self:_getPlayer() == Players.LocalPlayer, "Cannot set grip for non-local player")
 	assert(sideName == "Left" or sideName == "Right", "Bad sideName")

@@ -4,14 +4,9 @@
 
 local require = require(script.Parent.loader).load(script)
 
-local Workspace = game:GetService("Workspace")
-local CollectionService = game:GetService("CollectionService")
-
 local AdorneeUtils = require("AdorneeUtils")
 local BaseObject = require("BaseObject")
 local CharacterUtils = require("CharacterUtils")
-local CollectionServiceUtils = require("CollectionServiceUtils")
-local Draw = require("Draw")
 local IKBindersServer = require("IKBindersServer")
 local IKGripUtils = require("IKGripUtils")
 local Maid = require("Maid")
@@ -20,8 +15,6 @@ local NetworkRopeUtils = require("NetworkRopeUtils")
 local RootPartUtils = require("RootPartUtils")
 local VREnabledHumanoidConstants = require("VREnabledHumanoidConstants")
 local VREnabledHumanoidUtils = require("VREnabledHumanoidUtils")
-
-local GRIP_RADIUS_STUDS = 10
 
 local VREnabledHumanoid = setmetatable({}, BaseObject)
 VREnabledHumanoid.ClassName = "VREnabledHumanoid"
@@ -135,7 +128,7 @@ function VREnabledHumanoid:_setupHoldingValue(holdingValue, holdingAttachment)
 
 		local alignPosition = Instance.new("AlignPosition")
 		alignPosition.Name = "HoldingAlignPosition"
-		alignPosition.Responsiveness = 100
+		alignPosition.Responsiveness = 50
 		alignPosition.Attachment0 = attachment
 		alignPosition.Attachment1 = holdingAttachment
 		alignPosition.Parent = attachment
@@ -143,7 +136,7 @@ function VREnabledHumanoid:_setupHoldingValue(holdingValue, holdingAttachment)
 
 		local alignOrientation = Instance.new("AlignOrientation")
 		alignOrientation.Name = "HoldingAlignOrientation"
-		alignOrientation.Responsiveness = 100
+		alignOrientation.Responsiveness = 50
 		alignOrientation.Attachment0 = attachment
 		alignOrientation.Attachment1 = holdingAttachment
 		alignOrientation.Parent = attachment
@@ -197,6 +190,17 @@ function VREnabledHumanoid:_handleDrop(sideName)
 	end
 end
 
+function VREnabledHumanoid:GetHoldingValueObject(sideName)
+	if sideName == "Left" then
+		return self._leftHolding
+	elseif sideName == "Right" then
+		return self._rightHolding
+	else
+		error("Bad sideName")
+	end
+end
+
+
 function VREnabledHumanoid:_handleGrip(sideName)
 	assert(sideName == "Left" or sideName == "Right", "Bad sideName")
 
@@ -206,28 +210,14 @@ function VREnabledHumanoid:_handleGrip(sideName)
 		return
 	end
 
-	local partsAvailable = Workspace:GetPartBoundsInRadius(gripAttachment.WorldPosition, GRIP_RADIUS_STUDS)
-	-- self._maid._render = Draw.sphere(gripAttachment.WorldPosition, GRIP_RADIUS_STUDS)
+	local object = self:GetHoldingValueObject(sideName)
 
-	for _, item in pairs(partsAvailable) do
-		local holdable = CollectionServiceUtils.findFirstAncestor("VRHoldable", item)
-		if not holdable then
-			if CollectionService:HasTag(item, "VRHoldable") then
-				holdable = item
-			end
-		end
-
-		if holdable then
-			-- print("Holding holdable", holdable)
-			if sideName == "Left" then
-				self._leftHolding.Value = holdable
-			elseif sideName == "Right" then
-				self._rightHolding.Value = holdable
-			else
-				error("Bad sideName")
-			end
-			break
-		end
+	local holdable = VREnabledHumanoidUtils.findHoldable(gripAttachment.WorldPosition)
+	if holdable then
+		object.Value = holdable
+	else
+		-- Stop holding
+		object.Value = nil
 	end
 end
 

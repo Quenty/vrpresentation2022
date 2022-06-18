@@ -39,12 +39,17 @@ function VRHandControls:_setupGripLoop(sideName, sideUserCFrame)
 		return
 	end
 
+	local highlight = Instance.new("Highlight")
+	highlight.FillTransparency = 1
+	highlight.Name = ("Grip%sHighlight"):format(sideName)
+	self._maid:GiveTask(highlight)
+
 	self._maid:GiveTask(RunService.Stepped:Connect(function()
-		self:_updateGripStepped(sideName, sideUserCFrame)
+		self:_updateGripStepped(sideName, sideUserCFrame, highlight)
 	end))
 end
 
-function VRHandControls:_updateGripStepped(sideName, sideUserCFrame)
+function VRHandControls:_updateGripStepped(sideName, sideUserCFrame, highlight)
 	local handCFrame = VRService:GetUserCFrame(sideUserCFrame)
 	local camera = Workspace.CurrentCamera
 
@@ -57,6 +62,19 @@ function VRHandControls:_updateGripStepped(sideName, sideUserCFrame)
 	self._vrEnabledHumanoidClient:SetGripCFrame(sideName, cframe)
 
 	-- self._maid[sideName .. "debug"] = Draw.cframe(cframe)
+
+	if sideName == "Right" then
+		if self._vrEnabledHumanoidClient:GetHoldingAdornee(sideName) then
+			highlight.Parent = nil
+		else
+			local holdable = self._vrEnabledHumanoidClient:FindHoldable(sideName)
+			if holdable then
+				highlight.Parent = holdable
+			else
+				highlight.Parent = nil
+			end
+		end
+	end
 end
 
 function VRHandControls:_bindInput()
