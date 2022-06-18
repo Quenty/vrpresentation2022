@@ -1,0 +1,8 @@
+*                    text=auto
+*.lua                text eol=lf
+*.json               text eol=lf
+*.md                 text eol=lf
+*.txt                text eol=lf
+*.yml                text eol=lf
+src/i18n/**.json     text eol=crlf
+src/i18n/**.json.txt text eol=crlf

@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+			"folder_exclude_patterns": ["node_modules"],
+		},
+		{
+			"path": "..\\..\\libraries\\Raven",
+			"folder_exclude_patterns": ["node_modules"],
+		},
+		{
+			"path": "..\\..\\libraries\\Nevermore",
+			"folder_exclude_patterns": ["node_modules"],
+		},
+	],
+}

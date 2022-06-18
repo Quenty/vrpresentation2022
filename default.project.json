@@ -1,0 +1,25 @@
+{
+  "name": "VRPresentationService",
+  "tree": {
+    "$className": "DataModel",
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "vrpresentation": {
+        "$className": "Folder",
+        "$path": "src/modules"
+      },
+      "Quenty": {
+        "$path": "src/scripts/Server"
+      }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "Quenty": {
+          "$path": "src/scripts/Client"
+        }
+      }
+    }
+  }
+}

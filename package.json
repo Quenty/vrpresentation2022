@@ -1,0 +1,53 @@
+{
+  "name": "@quentystudios/vrpresentation",
+  "version": "1.0.0",
+  "description": "VR presentation",
+  "keywords": [
+    "Roblox",
+    "Raven",
+    "Lua"
+  ],
+  "bugs": {
+    "url": "https://github.com/Quenty/Raven/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Quenty/vrpresentation.git",
+    "directory": "games/vrpresentation/"
+  },
+  "license": "UNLICENSED",
+  "contributors": [
+    "Quenty"
+  ],
+  "dependencies": {
+    "@quenty/adorneeutils": "file:../../libraries/Nevermore/src/adorneeutils",
+    "@quenty/baseobject": "file:../../libraries/Nevermore/src/baseobject",
+    "@quenty/basicpane": "file:../../libraries/Nevermore/src/basicpane",
+    "@quenty/binder": "file:../../libraries/Nevermore/src/binder",
+    "@quenty/blend": "file:../../libraries/Nevermore/src/blend",
+    "@quenty/brio": "file:../../libraries/Nevermore/src/brio",
+    "@quenty/characterutils": "file:../../libraries/Nevermore/src/characterutils",
+    "@quenty/collectionserviceutils": "file:../../libraries/Nevermore/src/collectionserviceutils",
+    "@quenty/draw": "file:../../libraries/Nevermore/src/draw",
+    "@quenty/firstpersoncharactertransparency": "file:../../libraries/Nevermore/src/firstpersoncharactertransparency",
+    "@quenty/functionutils": "file:../../libraries/Nevermore/src/functionutils",
+    "@quenty/hide": "file:../../libraries/Nevermore/src/hide",
+    "@quenty/humanoidtracker": "file:../../libraries/Nevermore/src/humanoidtracker",
+    "@quenty/ik": "file:../../libraries/Nevermore/src/ik",
+    "@quenty/linkutils": "file:../../libraries/Nevermore/src/linkutils",
+    "@quenty/loader": "file:../../libraries/Nevermore/src/loader",
+    "@quenty/networkownerservice": "file:../../libraries/Nevermore/src/networkownerservice",
+    "@quenty/networkropeutils": "file:../../libraries/Nevermore/src/networkropeutils",
+    "@quenty/playerhumanoidbinder": "file:../../libraries/Nevermore/src/playerhumanoidbinder",
+    "@quenty/remoting": "file:../../libraries/Nevermore/src/remoting",
+    "@quenty/rx": "file:../../libraries/Nevermore/src/rx",
+    "@quenty/servicebag": "file:../../libraries/Nevermore/src/servicebag",
+    "@quenty/table": "file:../../libraries/Nevermore/src/table",
+    "@quenty/valuebaseutils": "file:../../libraries/Nevermore/src/valuebaseutils",
+    "@quentystudios/t": "^1.2.5"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  }
+}
